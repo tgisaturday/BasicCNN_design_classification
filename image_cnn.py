@@ -32,7 +32,6 @@ class TextCNN(object):
                 num_filters_prev = num_filters
                 num_filters *= 2
                 pooled_prev = pooled
-                filter_size += 2
 
         # Combine all the pooled features
         pooled_size_total = 256 >> num_layers
