@@ -15,10 +15,11 @@ class TextCNN(object):
         num_filters = 32
         num_filters_prev = 1
         pooled_prev = x_image
+        filter_size = 3
         for i in range(num_layers):
             with tf.name_scope('conv-maxpool-%d' % i):
                 # Convolution Layer
-                filter_shape = [5, 5, num_filters_prev, num_filters]
+                filter_shape = [filter_size, filter_size, num_filters_prev, num_filters]
                 W = tf.Variable(tf.truncated_normal(filter_shape, stddev=0.1), name='W')
                 b = tf.Variable(tf.constant(0.1, shape=[num_filters]), name='b')
                 conv = tf.nn.conv2d(pooled_prev, W, strides=[1, 1, 1, 1], padding='SAME', name='conv')
@@ -31,6 +32,7 @@ class TextCNN(object):
                 num_filters_prev = num_filters
                 num_filters *= 2
                 pooled_prev = pooled
+                filter_size += 2
 
         # Combine all the pooled features
         pooled_size_total = 256 >> num_layers
