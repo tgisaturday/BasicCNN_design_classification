@@ -15,7 +15,7 @@ class TextCNN(object):
         num_filters = 32
         num_filters_prev = 1
         pooled_prev = x_image
-        filter_size = 3
+        filter_size = 5
         for i in range(num_layers):
             with tf.name_scope('conv-maxpool-%d' % i):
                 # Convolution Layer
